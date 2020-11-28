@@ -58,8 +58,10 @@ def signupsuccess(request):
             object = userdetails.objects.get(name=name)
             name = object.name
             r = product.objects.all()
+            messages.success(request,"welcome"+object.name)
+            return redirect('home')
 
-            return render(request,"reglog/home.html",{"k":name,"name":r})
+            #return render(request,"reglog/home.html",{"k":name,"name":r})
 
 
 

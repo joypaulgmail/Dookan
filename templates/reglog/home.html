@@ -159,14 +159,28 @@ li a {
       <li class="nav-item">
         <a class="nav-link" href="#">Order's<i class="fa fa-cart"></i></a>
       </li>
+         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        For Sale
+        </a>
+        <div class="dropdown-menu float-left" aria-labelledby="navbarDropdown" style="color:black;">
+
+          <a class="dropdown-item" style="color:black;width:200px;padding-left:10px;" href="client/signup">Signup</a>
+          <a class="dropdown-item" style="color:black;width:200px" href="client/signin">Signin</a>
+
+          <a class="dropdown-item" style="color:black;width:200px" href="client/loggingoff">LoginOff</a>
+      </li>
          <li class="nav-item">
         <a class="nav-link" href="additem">For Sale</a>
       </li>
 
-         {% if k %}
+         {% if messages %}
+        {% for message in messages %}
          <li style="padding:3px;" class="nav-item">
-        <a class="nav-link" href="additem" style="color:black">Welcome {{k}}</a>
+        <a class="nav-link" href="additem" style="color:black">{{message}}</a>
+
       </li>
+        {% endfor %}
         {% endif %}
 
 
