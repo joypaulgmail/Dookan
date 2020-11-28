@@ -19,7 +19,7 @@ def home(request):
 
 
 
-    r=product.objects.all()
+    r=product.objects.raw("select * from product")
 
 
     return render(request,"reglog/home.html",{"name":r})
