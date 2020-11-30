@@ -3,7 +3,7 @@ class ClientInformation(models.Model):
     name=models.CharField(max_length=60)
     primary_contact=models.CharField(max_length=15)
     secondary_contact=models.CharField(max_length=15)
-    email=models.EmailField(blank=True,null=True)
+    email=models.EmailField(primary_key=True)
     address=models.TextField()
     pin=models.CharField(max_length=15)
     image=models.ImageField(upload_to="client/")

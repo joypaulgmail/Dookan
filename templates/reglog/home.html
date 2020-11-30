@@ -156,9 +156,6 @@ li a {
 
           <a class="dropdown-item" style="color:black;width:200px" href="#">Something else here</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Order's<i class="fa fa-cart"></i></a>
-      </li>
          <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         For Sale
@@ -170,9 +167,11 @@ li a {
 
           <a class="dropdown-item" style="color:black;width:200px" href="client/loggingoff">LoginOff</a>
       </li>
+         {% if messages %}
          <li class="nav-item">
-        <a class="nav-link" href="additem">For Sale</a>
+        <a class="nav-link" href="additem">Add Your Item</a>
       </li>
+        {% endif %}
 
          {% if messages %}
         {% for message in messages %}
@@ -363,11 +362,5 @@ li a {
 
 </nav>
 
-<h1>{{username}}</h1>
-{% if messages %}
-{% for message in messages %}
-<h1>{{message}}</h1>
-{% endfor %}
-{% endif %}
 </body>
 </html>

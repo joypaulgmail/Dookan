@@ -7,7 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body><h1>welcome to signin</h1>
+<body><h1>welcome to signin done</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">submit</button>
+    </form>
 
 </body>
 </html>

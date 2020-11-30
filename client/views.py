@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from client.models import ClientInformation
 from django.http import HttpResponse
+from django.contrib import messages
 
 def signup(request):
     return render(request,'client/signup.html')
@@ -25,8 +26,28 @@ def client_signup_success(request):
 
 
 
+from client.forms import LoginForm
 def signin(request):
-    return render(request,'client/signin.html')
+    fm=LoginForm()
+    if request.method=="POST":
+        fm=LoginForm(request.POST)
+        email = request.POST.get("email")
+        ob = ClientInformation.objects.raw("select * from clientinformation where email=%s", (email,))
+        for i in ob:
+            messages.success(request,i.name)
+            return redirect("home")
+
+
+
+
+
+
+
+
+
+
+
+    return render(request,'client/signin.html',{"form":fm})
 
 def loggingoff(request):
     return render(request,'client/loggingoff.html')
