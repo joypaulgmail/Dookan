@@ -140,6 +140,14 @@ li a {
     </form>
 
       </li>
+        {% if flag%}
+           <li style="padding:3px;" class="nav-item">
+        <a  href="client/loggingoff" class="btn btn-white" target="_blank">Loginof</a>
+           </li>
+
+
+        {% else %}
+
          <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Account & List
@@ -160,23 +168,26 @@ li a {
         <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         For Sale
         </a>
+
         <div class="dropdown-menu float-left" aria-labelledby="navbarDropdown" style="color:black;">
 
           <a class="dropdown-item" style="color:black;width:200px;padding-left:10px;" href="client/signup">Signup</a>
           <a class="dropdown-item" style="color:black;width:200px" href="client/signin">Signin</a>
 
           <a class="dropdown-item" style="color:black;width:200px" href="client/loggingoff">LoginOff</a>
+
       </li>
+        {% endif %}
          {% if messages %}
-         <li class="nav-item">
-        <a class="nav-link" href="additem">Add Your Item</a>
+         <li class="nav-item" style="padding:3px;">
+        <a class="btn btn-white" target="_blank" href="additem">Add Your Item</a>
       </li>
         {% endif %}
 
          {% if messages %}
         {% for message in messages %}
          <li style="padding:3px;" class="nav-item">
-        <a class="nav-link" href="additem" style="color:black">{{message}}</a>
+        <a class="btn btn-white" target="_blank" >{{message}}</a>
 
       </li>
         {% endfor %}

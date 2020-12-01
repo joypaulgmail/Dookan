@@ -9,6 +9,10 @@ from reglog.forms import newform,Exform,users,productforms
 def home(request):
     #signals.mysig.send(sender=None,user=["hello"])
    # signals.mysign.send(sender=delivard)
+    flag=None
+    if request.COOKIES.get("email") and request.COOKIES.get("password"):
+        flag=True
+
     if request.method=="POST":
         fm=Exform(request.POST)
         if fm.is_valid:
@@ -22,7 +26,7 @@ def home(request):
     r=product.objects.raw("select * from product")
 
 
-    return render(request,"reglog/home.html",{"name":r})
+    return render(request,"reglog/home.html",{"name":r,"flag":flag})
 
 def itemadd(request):
     coun=1

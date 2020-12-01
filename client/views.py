@@ -7,8 +7,7 @@ import string
 
 
 def signup(request):
-    x=request.COOKIES['mycookie']
-    return render(request,'client/signup.html',{"name":x})
+    return render(request,'client/signup.html')
 
 def client_signup_success(request):
     if request.method=="POST":
