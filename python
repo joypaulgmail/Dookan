@@ -1,0 +1,4 @@
+Operations to perform:
+  Apply all migrations: admin, auth, client, contenttypes, reglog, sessions
+Running migrations:
+  Applying client.0009_auto_20201130_1800...

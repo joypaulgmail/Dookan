@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='clientinformation',
             name='email',
-            field=models.EmailField(default=True, max_length=254, primary_key=True, serialize=False),
+            field=models.EmailField(default=True, max_length=254, serialize=False),
             preserve_default=False,
         ),
     ]
