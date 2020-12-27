@@ -6,7 +6,7 @@ class ClientInformation(models.Model):
     email=models.EmailField()
     address=models.TextField()
     pin=models.CharField(max_length=15)
-    idproof=models.ImageField(upload_to="client/id")
+    idproof=models.ImageField(upload_to="client/id",blank=True)
     password=models.CharField(max_length=50)
     unique_id=models.CharField(max_length=100,primary_key=True)
 

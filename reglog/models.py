@@ -1,20 +1,4 @@
 from django.db import models
-
-
-
-class product(models.Model):
-    name=models.CharField(max_length=100)
-    price=models.IntegerField()
-    image=models.ImageField(null=True,blank=True,upload_to='media/')
-    description=models.TextField()
-
-    def __str__(self):
-
-        return self.name
-
-    class Meta:
-        db_table = "product"
-
 class userdetails(models.Model):
     name=models.CharField(max_length=100)
     mobile=models.IntegerField()
@@ -31,6 +15,24 @@ class userdetails(models.Model):
         return self.name
     class Meta:
         db_table = "userdetails"
+
+
+class product(models.Model):
+    name=models.CharField(max_length=100)
+    price=models.IntegerField()
+    image=models.ImageField(null=True,blank=True,upload_to='media/')
+    description=models.TextField()
+    makername=models.ForeignKey(userdetails,on_delete=models.CASCADE,to_field='id',blank=True,null=True)
+
+
+    def __str__(self):
+
+        return self.name
+
+    class Meta:
+        db_table = "product"
+
+
 
 
 class delivard(models.Model):

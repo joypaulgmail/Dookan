@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'reglog.apps.ReglogConfig',
     'client.apps.ClientConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

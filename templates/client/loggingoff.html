@@ -9,5 +9,53 @@
 </head>
 <body>
 <h1>welcome to loggingoff</h1>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.
+css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var tags = [
+    "Delhi",
+    "Ahemdabad",
+    "Punjab",
+    "Uttar Pradesh",
+    "Himachal Pradesh",
+    "Karnatka",
+    "Kerela",
+    "Maharashtra",
+    "Gujrat",
+    "Rajasthan",
+    "Bihar",
+    "Tamil Nadu",
+    "Haryana"
+
+
+      /* Making a list of available tags */
+
+
+    ];
+    $( "#srch" ).autocomplete({
+      source: tags
+
+/* #tthe ags is the id of the input element
+source: tags is the list of available tags*/
+
+
+    });
+  } );
+  </script>
+
+
+<div class="ui-widget">
+ <H3>Enter an alphabet to get suggestion:</H3>
+  <input id="srch">
+</div>
+
+</body>
+</html>
+
+
 </body>
 </html>

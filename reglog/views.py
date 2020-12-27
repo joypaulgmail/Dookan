@@ -28,6 +28,13 @@ def home(request):
 
     return render(request,"reglog/home.html",{"name":r,"flag":flag})
 
+
+def order_done(request):
+    if request.method=="POST":
+        id=request.POST.get("id")
+
+    return render(request,"reglog/orderdone.html",{"id":id})
+
 def itemadd(request):
     coun=1
     x=userdetails(itemadd=coun)

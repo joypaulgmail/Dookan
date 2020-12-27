@@ -115,6 +115,30 @@ li a {
 
     </style>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.
+css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var tags =["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan",
+    "Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei",
+    "Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands",
+    "Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea",
+    "Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar",
+    "Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland",
+    "Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya",
+    "Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico",
+    "Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia",
+    "New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal",
+    "Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles",
+    "Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+    $( "#srch" ).autocomplete({
+      source: tags
+    });
+  } );
+  </script>
 </head>
 <header>
 
@@ -129,8 +153,9 @@ li a {
     <ul class="navbar-nav mr-auto">
           <li class="nav-item">
            <form class="form-inline my-2 my-lg-0" action="/result/">
-
+               <div class="ui-widget">
                 <input id="srch" type="text" class="form-control" placeholder="Search this blog">
+               </div>
                 <div class="input-group-append">
                     <button id="srchbtn" class="btn btn-primary" type="submit">
                         <i class="fa fa-search"></i>
@@ -150,7 +175,7 @@ li a {
 
          <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Account & List
+        To Buy
         </a>
         <div class="dropdown-menu float-left" aria-labelledby="navbarDropdown" style="color:black;">
                <form id="Signin" class="form-inline" action="/signin/">
@@ -192,7 +217,6 @@ li a {
       </li>
         {% endfor %}
         {% endif %}
-
 
 
     </ul>
@@ -259,7 +283,7 @@ li a {
     <div class="carousel-inner">
 
       <div class="item active">
-        <img src="{%static 'two.jpg'%}" alt="Los Angeles" style="width:100%;height:400px;">
+        <img src="{%static 'cake.jpg'%}" alt="Los Angeles" style="width:100%;height:400px;">
         <div class="carousel-caption">
           <h3>Pleasure to serve You</h3>
 
@@ -267,7 +291,7 @@ li a {
       </div>
 
       <div class="item">
-        <img src="{%static 'one.jpeg'%}" alt="Chicago" style="width:100%;height:400px;">
+        <img src="{%static 'jewellery3.jpg'%}" alt="Chicago" style="width:100%;height:400px;">
         <div class="carousel-caption">
           <h3>Chicago</h3>
           <p>Thank you, Chicago!</p>
@@ -275,7 +299,7 @@ li a {
       </div>
 
       <div class="item">
-        <img src="{%static 'three.jpeg'%}" alt="New York" style="width:100%;height:400px;">
+        <img src="{%static 'pizza.jpg'%}" alt="New York" style="width:100%;height:400px;">
         <div class="carousel-caption">
           <h3>New York</h3>
           <p>We love the Big Apple!</p>
@@ -283,10 +307,10 @@ li a {
       </div>
 
             <div class="item">
-        <img src="{%static 'four.jpeg'%}" alt="New York" style="width:100%;height:400px;">
+        <img src="{%static 'jewellery2.jpg'%}" alt="New York" style="width:100%;height:400px;">
         <div class="carousel-caption">
-          <h3>New York</h3>
-          <p>We love the Big Apple!</p>
+          <h1>Make Me</h1>
+          <p>I Will Proud You</p>
         </div>
       </div>
 
@@ -328,9 +352,9 @@ li a {
                             <p>{{item.description}}</p>
                          </div>
                   </div>
-                      <form action="/" method="post">
+                      <form action="orderdone/" method="post">
                           {% csrf_token %}
-                          <input type="text" value="{{item.id}}" name="item">
+                          <input type="text" value="{{item.id}}" name="id">
                 <button  style="margin-left:70%;padding-left:30px;" type="submit" class="btn btn-success">Add to bag</button>
                       </form>
                </div>
@@ -375,3 +399,4 @@ li a {
 
 </body>
 </html>
+
