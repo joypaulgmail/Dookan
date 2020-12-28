@@ -155,16 +155,7 @@ def newfrm(request):
 
 from django.contrib.auth.decorators import login_required
 
-def additem(request):
-    frm=productforms()
-    if request.method=="POST":
-        frm=productforms(request.POST,request.FILES)
-        if frm.is_valid():
-            frm.save()
-            return HttpResponse("done")
 
-
-    return render(request,'reglog/additem.html',{'form':frm})
     
 '''
 

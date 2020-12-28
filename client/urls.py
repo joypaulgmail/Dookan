@@ -9,10 +9,14 @@ urlpatterns = [
     path('signup/',views.signup,name="signup"),
     path('client_signup_success/', views.client_signup_success, name="client_signup_success"),
     path('signin/',views.signin,),
-    path('additem/', views.additem, name='additem'),
     path('loggingoff/',views.loggingoff,name="loggingoff"),
+    path('additem/', views.additem, name='additem'),
 
-    #path('showdata/',views.ShowData.as_view()),
+
+
+    ]
+'''
+ #path('showdata/',views.ShowData.as_view()),
     #path('onedata/<str:unique_id>',views.OneData.as_view()),
     #path('apidata/',views.ApiData.as_view()),
     #path('clientapi/<str:unique_id>',views.ClientApi.as_view()),
@@ -38,4 +42,6 @@ urlpatterns = [
     path('destroymixins/<str:unique_id>',views.ClientDestroyMixins.as_view()),
     path('joy/',views.Joy.as_view())
 
-    ]
+
+
+'''

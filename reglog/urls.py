@@ -15,7 +15,7 @@ urlpatterns = [
     path('signout',views.signout,name='signout'),
     path('signin_success/',views.signinsuccess),
     path("newform/", views.newfrm),
-    path('additem/',views.additem,name='additem'),
+
 
 
    # path("login/",views.login),

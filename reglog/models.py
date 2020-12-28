@@ -22,7 +22,7 @@ class product(models.Model):
     price=models.IntegerField()
     image=models.ImageField(null=True,blank=True,upload_to='media/')
     description=models.TextField()
-    makername=models.ForeignKey(userdetails,on_delete=models.CASCADE,to_field='id',blank=True,null=True)
+    makername=models.CharField(max_length=50,blank=True,null=True)
 
 
     def __str__(self):

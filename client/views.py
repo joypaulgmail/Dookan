@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
+from reglog.models import product
 from client.models import ClientInformation
 from django.http import HttpResponse
 from django.contrib import messages
+from client.forms import productforms
 import  random
 import string
 
@@ -58,8 +60,6 @@ def signin(request):
             for i in ob:
                 request.session['email'] =i.email
                 request.session['password']=i.password
-                print(request.session['email'])
-                print(request.session['password'])
                 messages.success(request, i.name)
                 response=redirect("home")
                 response.set_cookie('email',request.session['email'])
@@ -73,8 +73,43 @@ def signin(request):
     return render(request,'client/signin.html',{"form":fm})
 
 
+def additem(request):
+    email=request.COOKIES.get('email')
+
+    frm=productforms()
+    if request.method=="POST":
+
+
+        frm=productforms(request.POST,request.FILES)
+
+
+        if frm.is_valid():
+
+
+
+
+
+            frm=frm.save(commit=False)
+            frm.makername=email
+            frm.save()
+            return HttpResponse("done")
+
+
+    return render(request,'client/additem.html',{'form':frm})
+
+
+
+
+
+
+
+
+
+
+
 def loggingoff(request):
-    response=render(request,'client/loggingoff.html')
+
+    response=redirect('home')
     response.delete_cookie('email')
     response.delete_cookie('password')
     return response
@@ -221,6 +256,7 @@ class SingleUrl(APIView):
 
 
 
+'''
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -349,6 +385,9 @@ class Joy(APIView):
         serialize=ClientSerialize(ob,many=True)
 
         return Response(serialize.data)
+
+'''
+
 
 
 
