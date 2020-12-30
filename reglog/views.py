@@ -31,9 +31,15 @@ def home(request):
 
 def order_done(request):
     if request.method=="POST":
-        id=request.POST.get("id")
+        makername=request.POST.get("makername")
+        name=request.POST.get("item")
+        print(name)
+        print(makername)
+        ob=product.objects.raw("UPDATE product SET booking=1 WHERE makername=%s",(makername,))
+        print(ob)
 
-    return render(request,"reglog/orderdone.html",{"id":id})
+
+    return render(request,"reglog/orderdone.html",{"id":makername})
 
 def itemadd(request):
     coun=1

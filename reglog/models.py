@@ -23,6 +23,7 @@ class product(models.Model):
     image=models.ImageField(null=True,blank=True,upload_to='media/')
     description=models.TextField()
     makername=models.CharField(max_length=50,blank=True,null=True)
+    booking=models.CharField(max_length=50,blank=True,null=True)
 
 
     def __str__(self):
