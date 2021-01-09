@@ -8,9 +8,10 @@ urlpatterns = [
     path('',views.signup,name='welcome'),
     path('signup/',views.signup,name="signup"),
     path('client_signup_success/', views.client_signup_success, name="client_signup_success"),
-    path('signin/',views.signin,),
+    path('signin/',views.signin,name="signin"),
     path('loggingoff/',views.loggingoff,name="loggingoff"),
     path('additem/', views.additem, name='additem'),
+    path('retrieve/', views.RetrieveApiView.as_view()),
 
 
 

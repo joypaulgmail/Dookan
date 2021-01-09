@@ -111,4 +111,47 @@ def sing(unique_id=None):
     ENDPOINT = "client/one/"
 
 
-sing(420)
+#sing(420)
+
+class Prime:
+    def __init__(self,num):
+        self.num=num
+        lis=[]
+        for i in range(1,self.num+1):
+            for j in range(2,(i//2)+1):
+                if i%j==0:
+                    lis.append(i)
+
+                    break
+        print(lis)
+        if self.num in lis:
+            print("number is not prime")
+        else:
+            print("prime number ",self.num)
+
+#ob=Prime(17)
+
+class Demo:
+    def hell(self,num):
+        if num<100:
+            x=num//10
+            y=num%10
+            first=x
+            second=y%10
+            sum=first+second
+            product=first*second
+            if sum+product==num:
+                print(num)
+
+obs=Demo()
+obs.hell(29)
+
+
+
+
+
+
+
+
+
+

@@ -24,6 +24,7 @@ class product(models.Model):
     description=models.TextField()
     makername=models.CharField(max_length=50,blank=True,null=True)
     booking=models.CharField(max_length=50,blank=True,null=True)
+    type=models.CharField(max_length=50,blank=True,null=True)
 
 
     def __str__(self):

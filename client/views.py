@@ -7,8 +7,11 @@ from client.forms import productforms
 import  random
 import string
 
-
+import requests
 def signup(request):
+
+
+
     return render(request,'client/signup.html')
 
 def client_signup_success(request):
@@ -114,6 +117,12 @@ def loggingoff(request):
     response.delete_cookie('password')
     return response
 
+
+from rest_framework.generics import RetrieveAPIView,ListAPIView
+from client.serializers import ClientSerializer,ClientSerialize
+class RetrieveApiView(ListAPIView):
+    queryset=ClientInformation.objects.all()
+    serializer_class = ClientSerialize
 
 
 

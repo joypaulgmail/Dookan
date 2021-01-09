@@ -30,16 +30,28 @@ def home(request):
 
 
 def order_done(request):
-    if request.method=="POST":
-        makername=request.POST.get("makername")
-        name=request.POST.get("item")
-        print(name)
-        print(makername)
-        ob=product.objects.raw("UPDATE product SET booking=1 WHERE makername=%s",(makername,))
-        print(ob)
+    if  request.COOKIES.get("email") and request.COOKIES.get("password"):
 
 
-    return render(request,"reglog/orderdone.html",{"id":makername})
+        if request.method=="POST":
+            makername=request.POST.get("makername")
+            name=request.POST.get("item")
+            query=product.objects.filter(makername=makername).filter(name=name)[0]
+            print(query.booking)
+            booking=str(int(query.booking)+1)
+
+
+
+
+
+            ob=product.objects.filter(makername=makername).filter(name=name).update(booking=booking)
+        #ob=product.objects.raw("UPDATE product SET booking=1 WHERE makername=%s",(makername,))
+            print(ob)
+
+
+        return render(request,"reglog/orderdone.html",{"id":makername})
+    else:
+        return render(request,"reglog/signin.html")
 
 def itemadd(request):
     coun=1
@@ -89,8 +101,16 @@ def signupsuccess(request):
 from django.contrib.auth.decorators import login_required
 @login_required()
 def result(request):
+    flag = None
+    if request.COOKIES.get("email") and request.COOKIES.get("password"):
+        flag = True
+    if request.method=="POST":
+        search=request.POST.get("srch")
+        r=product.objects.raw("select * from product where type=%s",(search,))
 
-    return render(request,"reglog/result.html")
+        return render(request, "reglog/home.html",{"name":r,"flag":flag})
+
+
 
 def signin(request):
     return render(request,"reglog/signin.html")
@@ -120,20 +140,19 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegistrationForm
 def signinsuccess(request):
-    fm=RegistrationForm()
+
     if request.method=="POST":
-        fm=RegistrationForm(request.POST)
-        if fm.is_valid():
-            fm.save()
-            print("ok")
+        username = request.POST.get('username')
+        password = request.POST.get("password")
 
-            return HttpResponse("register done")
-    return render(request, 'demo/register.html', {"fm": fm})
+        query=userdetails.objects.filter(email=username).filter(password=password)[0]
+        if query:
+            response=redirect("home")
+            response.set_cookie('email',username)
+            response.set_cookie('password',password)
+            return response
 
-
-
-
-
+    return render(request, 'reglog/signin.html', {"fm": fm})
 
 
 def signout(request):
