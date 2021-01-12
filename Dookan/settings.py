@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'reglog.apps.ReglogConfig',
     'client.apps.ClientConfig',
     'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,10 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
+JWT_AUTH = {
+
+    'JWT_ALLOW_REFRESH': True,
+}
 
 
 

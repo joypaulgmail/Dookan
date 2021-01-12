@@ -175,6 +175,83 @@ def newfrm(request):
     return render(request,"reglog/forms.html",{"user":frm})
 
 
+from reglog.serializers import ProductSerializer
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import ListAPIView
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from reglog.authentications import CustomAuthentication,CustomAuthenticationByKey
+from reglog.permissions import GetOnly,GetOrPost
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+class ProductViewset(ModelViewSet):
+    queryset = product.objects.all()
+    serializer_class = ProductSerializer
+    authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated,]
+
+
+from rest_framework.generics import ListAPIView
+from rest_framework.authentication import BasicAuthentication
+class ListProductApi(ListAPIView):
+    queryset=product.objects.all()
+    serializer_class = ProductSerializer
+    authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated,]
+
+from django.views.generic import View
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
+import io
+from rest_framework.parsers import JSONParser
+from django.utils.decorators import method_decorator
+
+
+class DempApi(View):
+
+    def get(self,request):
+        query=product.objects.all()
+        serializer=ProductSerializer(query,many=True)
+        json_data=JSONRenderer().render(serializer.data)
+        return HttpResponse(json_data,content_type="application/json")
+
+    def post(self,request,*args,**kwargs):
+        json_data=requst.body
+        stream=io.BytesIO(json_data)
+        pdata=JSONParser().parse(stream)
+        serializer=ProductSerializer(data=pdata)
+        if serializer.is_valid():
+            serializer.save()
+            return HttpResponse(serializer.validated_data)
+
+
+
+
+
+'''
+
+class ProductViewset(ModelViewSet):
+    queryset = product.objects.all()
+    serializer_class = ProductSerializer
+    authentication_classes = [JSONWebTokenAuthentication,]
+    permission_classes = [IsAuthenticated,]
+'''
+
+
+'''
+from reglog.permissions import GetOnly,GetOrPost
+from reglog.authentications import CustomAuthentication
+
+class ProductViewset(ModelViewSet):
+    queryset = product.objects.all()
+    serializer_class = ProductSerializer
+    authentication_classes = [CustomAuthentication,]
+    permission_classes = [GetOrPost,]
+    '''
+
+
+
+
+
 
 
 
