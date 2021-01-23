@@ -186,8 +186,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 class ProductViewset(ModelViewSet):
     queryset = product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [TokenAuthentication,]
-    permission_classes = [IsAuthenticated,]
+
 
 
 from rest_framework.generics import ListAPIView
@@ -205,8 +204,8 @@ import io
 from rest_framework.parsers import JSONParser
 from django.utils.decorators import method_decorator
 
-
-class DempApi(View):
+from rest_framework.views import APIView
+class DempApi(APIView):
 
     def get(self,request):
         query=product.objects.all()
@@ -214,15 +213,23 @@ class DempApi(View):
         json_data=JSONRenderer().render(serializer.data)
         return HttpResponse(json_data,content_type="application/json")
 
-    def post(self,request,*args,**kwargs):
-        json_data=requst.body
+    def post(self,request):
+        json_data=request.body
         stream=io.BytesIO(json_data)
         pdata=JSONParser().parse(stream)
-        serializer=ProductSerializer(data=pdata)
+        serializer=ProductSerializer(data=pdata)     #files=request.FILES
         if serializer.is_valid():
             serializer.save()
-            return HttpResponse(serializer.validated_data)
+            return HttpResponse(serializer.data)
 
+
+from rest_framework.viewsets import ModelViewSet
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+class ViewsetProduct(ModelViewSet):
+    queryset = product.objects.all()
+    serializer_class = ProductSerializer
+    authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 
