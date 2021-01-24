@@ -58,8 +58,15 @@ def itemadd(request):
     x=userdetails(itemadd=coun)
     return render(request,"reglog/home.html",{"name":r})
 
-def register(request):
+
+def reg(request):
     return render(request, "reglog/register.html")
+
+
+def register(request):
+    return redirect('reg')
+
+
 
 
 
@@ -174,6 +181,47 @@ def newfrm(request):
 
     return render(request,"reglog/forms.html",{"user":frm})
 
+def today(request):
+    flag = None
+    if request.COOKIES.get("email") and request.COOKIES.get("password"):
+        flag=True
+        r = product.objects.raw("select * from product")
+        return render(request,'reglog/todays_deal.html',{'name':r,'flag':flag})
+
+
+def todays_deal(request):
+    return redirect('todays')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def dokan_offer(request):
+    flag = None
+    if request.COOKIES.get("email") and request.COOKIES.get("password"):
+        flag = True
+        r = product.objects.raw("select * from product")
+        return render(request, 'reglog/dokan_offer.html', {'name': r, 'flag': flag})
+
+
+
+def dkn(request):
+    return redirect('dokan_offer')
+
 
 from reglog.serializers import ProductSerializer
 from rest_framework.viewsets import ModelViewSet
@@ -194,7 +242,7 @@ from rest_framework.authentication import BasicAuthentication
 class ListProductApi(ListAPIView):
     queryset=product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated,]
 
 from django.views.generic import View
@@ -228,7 +276,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 class ViewsetProduct(ModelViewSet):
     queryset = product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
 

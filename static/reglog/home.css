@@ -1,0 +1,98 @@
+*{margin:0;padding:0}
+ body, html {
+                height: 100%;
+                width:100%;
+                overflow-x:hidden;
+                }
+  body {margin:0;padding:0;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
+#navbar {
+    margin:0;
+    padding:0;
+}
+#dookan{font-size:35px;font-weight:bold;color:black;}
+img{opacity:0.7;}
+form{padding-top:4px;padding-left:20px;}
+
+
+li a {
+      font-size:15px;margin-left:20px;}
+      a:hover{color:#000;
+      }
+
+
+#signin{color:white;background-color:skyblue;width:180px;height:40px;border:none;padding:0;margin:0;}
+#signin:hover{background-color:#AED6F1 ;color:black;transition:0.5s;}
+#srch{width:600px;height:42px;font-size:22px;}
+#srchbtn{height:42px;background-color:white;color:skyblue;font-size:22px;}
+#srchbtn:hover{background-color:skyblue;color:white;}
+#title a{font-size:20px;color:white;}
+#title a:hover{color:black;transition:0.5s;}
+#title .dropdown-menu .dropdown-item a{color:black;background-color:red}
+#price{font-size:30px;}
+#contain:hover{background-color:gray;transition:1s;}
+
+.icon-bar {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  width:40px;
+
+
+
+          }
+
+.icon-bar a {
+
+            text-align: center;
+            padding: 10px;
+            width:50px;
+
+            color: white;
+            font-size: 30px;
+            }
+
+.icon-bar a:hover {
+  background-color: skyblue;
+}
+
+.facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.google {
+  background: #dd4b39;
+  color: white;
+}
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.content {
+  margin-left: 75px;
+  font-size: 30px;
+}
+.navbar{margin:0;}
+.padding_zero{padding:0}
+
+
+#bottom{width:100%;height:400px;}

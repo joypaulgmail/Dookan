@@ -1,0 +1,10 @@
+*{margin:0;
+padding:0;}
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+
+
+
+.helo{margin-left:80px;}
+.w3-container{display:inline-block;margin-left:20px;}
+div .w3-container .detail{margin-left:170px;}
