@@ -1,36 +1,90 @@
-
 {% extends 'reglog/home.html' %}
 {% block content %}
+
 {% load static %}
+
+<html>
+<body>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+<style>
+*{margin:0;
+padding:0;}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.g-3{margin:20px;}
+.col-md-4{padding-top:50px;}
+.col-md-4:hover{border:2px solid gray;padding:0;margin:0;}
+.card {
+    border: none
+}
 
-<link rel="stylesheet" href="{% static 'reglog/dokan_offer.css' %}">
+.card-body {
 
+    flex: 1 1 auto;
+    padding: 10px
+}
+
+.card-text {
+    font-size: 13px
+}
+
+.card img{height:300px;}
+.card img:hover .col-md-3{border:2px solid red;}
+
+hr {
+    margin: 0.2rem 0;
+    color: #bfbebe
+}
+
+.buttons button {
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 2px
+}
+
+
+
+.helo{margin-left:80px;}
+.justify-content-between{color:black;font-weight:bold;font-size:30px;}
+.price{color:red;font-size:20px;font-style:italic;font-weight:none;color:gray;}
+.btn-dark:hover{color:white;background-color:gray;font-weight:bold;}
+
+</style>
 <img src="{%static 'cake.jpg'%}" alt="Los Angeles" style="width:100%;height:400px;">
+<br>
+<br>
 
-
-<div class="w3-container w3-text-grey" id="jeans">
-    <p>8 items</p>
-  </div>
 
   <!-- Product grid -->
 
-  <div class="w3-row w3-grayscale helo">
+<div class="row g-3">
+    {% for item in name %}
 
-        <div class="coli" style="height:150px;">
-          {% for item in name %}
-            <div class="w3-container">
-                <a href=""> <img src="{{item.image.url}}" alt="Los Angeles" style="width:300;height:250px; border-radius: 50%"></a>
-              <p class="detail">{{item.name}}<br><b>{{item.price}}</b></p>
-          </div>
-           {% endfor %}
-      </div>
+                    <div class="col-md-4">
+                        <div class="card"><a href=""><img src="{{item.image.url}}" class="card-img-top"></a>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between"> <span class="font-weight-bold">{{item.name}}</span> <span class="price">&#x20b9; {{item.price}}</span> </div>
+                                <p class="card-text mb-1 mt-1">{{item.description}}</p>
+                            </div>
+                            <hr>
+                              <form action="orderdone/" method="post">
+                          {% csrf_token %}
+                                    <input  style="display:none" type="text" value="{{item.name}}" name="item">
+                            <div class="card-body">
+                                <div class="text-right buttons"> <button class="btn btn-dark" value="{{item.makername}}" name="makername">Order</button> </div>
+                            </div>
+                        </div>
+                    </div>
+    <br>
+    <br>
 
-  </div>
+    {% endfor %}
+</div>
+</body>
+</html>
 {% endblock %}
+
 

@@ -1,4 +1,5 @@
 from django.db import models
+from client.models import ClientInformation
 class userdetails(models.Model):
     name=models.CharField(max_length=100)
     mobile=models.IntegerField()
@@ -25,6 +26,8 @@ class product(models.Model):
     makername=models.CharField(max_length=50,blank=True,null=True)
     booking=models.CharField(max_length=50,blank=True,null=True)
     type=models.CharField(max_length=50,blank=True,null=True)
+    clientInfo=models.ForeignKey(ClientInformation,blank=True,null=True,on_delete=models.CASCADE)
+
 
 
     def __str__(self):

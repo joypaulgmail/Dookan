@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from reglog.models import product,userdetails,delivard
+from client.models import ClientInformation
 from django.contrib.auth.hashers import make_password
 from reglog import signals
 from reglog.forms import newform,Exform,users,productforms
@@ -110,12 +111,19 @@ from django.contrib.auth.decorators import login_required
 def result(request):
     flag = None
     if request.COOKIES.get("email") and request.COOKIES.get("password"):
+        #email=request.COOKIES.get("email")
+        #password=request.COOKIES.get("password")
+
         flag = True
     if request.method=="POST":
         search=request.POST.get("srch")
-        r=product.objects.raw("select * from product where type=%s",(search,))
+        city=request.POST.get('city')
 
-        return render(request, "reglog/home.html",{"name":r,"flag":flag})
+
+
+
+        row = product.objects.raw("select * from product where type=%s", (search,))
+        return render(request, "reglog/home.html",{"name":row,"flag":flag,'city':city})
 
 
 
@@ -191,20 +199,6 @@ def today(request):
 
 def todays_deal(request):
     return redirect('todays')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

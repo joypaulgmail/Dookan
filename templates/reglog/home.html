@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'reglog/homes.css' %}">
 
   <style>
-
+#sr{ font-family: 'FontAwesome', YourFont; }
 
     </style>
 
@@ -29,6 +29,13 @@ css">
   $( function() {
     var tags =["pizza","burger","cake","jewellery","jwellery"];
     $( "#srch" ).autocomplete({
+      source: tags
+    });
+  } );
+
+    $( function() {
+    var tags =["pizza","pighla","burger","cake","jewellery","jwellery"];
+    $( "#sr" ).autocomplete({
       source: tags
     });
   } );
@@ -51,6 +58,7 @@ css">
            <form class="form-inline my-2 my-lg-0" action="/result/" method="POST">
                {% csrf_token %}
                <div class="ui-widget">
+                   <input id="sr" style="width:100px;height:43px;" type="text" name="city" class="form-control" placeholder="City..">
                 <input id="srch" type="text" name="srch" class="form-control" placeholder="Search this blog">
                </div>
                 <div class="input-group-append">
@@ -61,11 +69,20 @@ css">
             </div>
     </form>
 
+
       </li>
         {% if flag%}
+
            <li style="padding:3px;" class="nav-item">
+
         <a  href="client/loggingoff" class="btn btn-white" target="_blank">Loginof</a>
            </li>
+           </select> <select name="sort" id="sort" class="px-1 py-1 ml-2">
+            <option value="" selected hidden>Sort by</option>
+            <option value="rating">Rating</option>
+            <option value="popular">Popular</option>
+            <option value="featured">Price</option>
+        </select>
 
 
         {% else %}
@@ -229,10 +246,21 @@ css">
 
 
 
-
+<br>
+<br>
 <div class="row" >
 
+
       {% for item in name %}
+    {% if city %}
+
+    {% if item.clientInfo.address == city %}
+
+
+
+
+
+
           <div class="col-sm-4 "  >
               <div class="card bg-light float-left" style="padding-top:20px;">
                   <div class="row"  id="contain"  >
@@ -242,10 +270,10 @@ css">
                   <div class="col-sm-6">
 
                         <div class="card-body" style="padding:12px;">
-                            <div class="card-title"> <h3 class="font-weight-bold text-primary" >{{item.name|upper}}</h3></div>
+                            <div class="card-title"> <h3 class="font-weight-bold text-primary" >{{item.name|upper}}{{item.clientInfo.pin}}</h3></div>
                             <table>
                             <tr>
-                                 <td><p>price: <td><td><div class="card-text"><p class="text-warning" id="price"> ₹{{item.price}}</p></div></td>
+                                 <td><p>price: <td><td><div class="card-text"><p class="text-warning" id="price"> ₹{{item.price}}{{item.clientInfo.pin}}</p></div></td>
                             </tr>
                             </table>
                             <p>{{item.description}}</p>
@@ -261,6 +289,42 @@ css">
                </div>
               </div>
           </div>
+    {% endif %}
+
+    {% else %}
+     <div class="col-sm-4 "  >
+              <div class="card bg-light float-left" style="padding-top:20px;">
+                  <div class="row"  id="contain"  >
+                  <div class="col-sm-5">
+                    <img src="{{item.image.url}}" style="width:200px;height:200px;">
+                  </div>
+                  <div class="col-sm-6">
+
+                        <div class="card-body" style="padding:12px;">
+                            <div class="card-title"> <h3 class="font-weight-bold text-primary" >{{item.name|upper}}{{item.clientInfo.pin}}</h3></div>
+                            <table>
+                            <tr>
+                                 <td><p>price: <td><td><div class="card-text"><p class="text-warning" id="price"> ₹{{item.price}}{{item.clientInfo.pin}}</p></div></td>
+                            </tr>
+                            </table>
+                            <p>{{item.description}}</p>
+
+                         </div>
+                  </div>
+                      <form action="orderdone/" method="post">
+                          {% csrf_token %}
+                          <input  style="display:none" type="text" value="{{item.name}}" name="item">
+
+                <button  style="margin-left:70%;padding-left:30px;" type="submit" class="btn btn-success" value="{{item.makername}}" name="makername">Add to bag</button>
+                      </form>
+               </div>
+              </div>
+          </div>
+
+
+
+
+     {% endif %}
 
 
   {% endfor %}

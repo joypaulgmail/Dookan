@@ -21,9 +21,12 @@ urlpatterns = [
 
 
     path('itemadd/',views.itemadd,name='itemadd'),
+
     path('result/',views.result),
     path('orderdone/',views.order_done,name='order_done'),
     path('todays/orderdone/', views.order_done, name='order_done'),
+    path('dokan_offer/orderdone/',views.order_done),
+
 
     path('signup_success/',views.signupsuccess,name='signupsuccess'),
     path('signin/',views.signin),
