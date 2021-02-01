@@ -17,6 +17,53 @@
 
   <style>
 #sr{ font-family: 'FontAwesome', YourFont; }
+*{margin:0;
+padding:0;}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.g-3{margin:20px;}
+.col-md-3{padding-top:15px;}
+.col-md-3:hover{border:2px solid lightgray;padding:10px;cursor:pointer;background-color:#F0F9F8;}
+.col-md-3:hover .buttons button{background-color:black;}
+.col-md-3:hover .buttons button:hover{background-color:gray;transition:0.5s;color:black;font-weight:normal;}
+
+.card {
+    border: none
+}
+
+.card-body {
+
+    flex: 1 1 auto;
+
+}
+
+.card-text {
+    font-size: 13px
+}
+
+.card img{height:300px;}
+.card img:hover .col-md-3{border:2px solid red;}
+
+hr {
+    margin: 0.2rem 0;
+    color: #bfbebe
+}
+
+.buttons button {
+
+    text-transform: uppercase;
+
+    border-radius: 2px;
+    background-color:white;
+}
+
+.buttons button:hover{background-color:red;}
+
+.name{text-transform:uppercase;}
+.helo{margin-left:80px;}
+.justify-content-between{color:black;font-weight:bold;font-size:20px;}
+.price{;font-size:20px;font-style:italic;font-weight:none;color:#4C0453;}
+.btn-dark:hover{color:white;background-color:gray;font-weight:bold;}
+.star{font-size:18px;color:#FED10B}
 
     </style>
 
@@ -255,71 +302,57 @@ css">
     {% if city %}
 
     {% if item.clientInfo.address == city %}
+              <div class="col-md-3">
+                        <div class="card"><a href=""><img src="{{item.image.url}}" class="card-img-top"></a>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between"> <span class="font-weight-bold name">{{item.name}}</span><span class="font-weigh star">{{item.booking}}&starf;</span>
+                                    <span class="price">&#x20b9;{{item.price}}</span> </div>
+                                <p class="card-text mb-1 mt-1">p{{item.address}}</p>
+                                <div class="d-flex justify-content-between"> <span class="font-weigh">{{item.type}}</span>
+
+                                </div>
+                                <h1>{{item.time}}</h1>
+                            </div>
+
+
+                              <form action="orderdone/" method="post">
+                                    {% csrf_token %}
+                                    <input  style="display:none" type="text" value="{{item.name}}" name="item">
+                            <div class="card-body">
+                                <div class="text-center buttons"> <button class="btn btn-dark" value="{{item.makername}}" name="makername">Order</button> </div>
+                            </div>
+                              </form>
+                        </div>
+                    </div>
 
 
 
-
-
-
-          <div class="col-sm-4 "  >
-              <div class="card bg-light float-left" style="padding-top:20px;">
-                  <div class="row"  id="contain"  >
-                  <div class="col-sm-5">
-                    <img src="{{item.image.url}}" style="width:200px;height:200px;">
-                  </div>
-                  <div class="col-sm-6">
-
-                        <div class="card-body" style="padding:12px;">
-                            <div class="card-title"> <h3 class="font-weight-bold text-primary" >{{item.name|upper}}{{item.clientInfo.pin}}</h3></div>
-                            <table>
-                            <tr>
-                                 <td><p>price: <td><td><div class="card-text"><p class="text-warning" id="price"> ₹{{item.price}}{{item.clientInfo.pin}}</p></div></td>
-                            </tr>
-                            </table>
-                            <p>{{item.description}}</p>
-
-                         </div>
-                  </div>
-                      <form action="orderdone/" method="post">
-                          {% csrf_token %}
-                          <input  style="display:none" type="text" value="{{item.name}}" name="item">
-
-                <button  style="margin-left:70%;padding-left:30px;" type="submit" class="btn btn-success" value="{{item.makername}}" name="makername">Add to bag</button>
-                      </form>
-               </div>
-              </div>
-          </div>
     {% endif %}
 
     {% else %}
-     <div class="col-sm-4 "  >
-              <div class="card bg-light float-left" style="padding-top:20px;">
-                  <div class="row"  id="contain"  >
-                  <div class="col-sm-5">
-                    <img src="{{item.image.url}}" style="width:200px;height:200px;">
-                  </div>
-                  <div class="col-sm-6">
+                <div class="col-md-3">
+                        <div class="card"><a href=""><img src="{{item.image.url}}" class="card-img-top"></a>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between"> <span class="font-weight-bold name">{{item.name}}</span><span class="font-weigh star">{{item.booking}}&starf;</span>
+                                    <span class="price">&#x20b9;{{item.price}}</span> </div>
 
-                        <div class="card-body" style="padding:12px;">
-                            <div class="card-title"> <h3 class="font-weight-bold text-primary" >{{item.name|upper}}{{item.clientInfo.pin}}</h3></div>
-                            <table>
-                            <tr>
-                                 <td><p>price: <td><td><div class="card-text"><p class="text-warning" id="price"> ₹{{item.price}}{{item.clientInfo.pin}}</p></div></td>
-                            </tr>
-                            </table>
-                            <p>{{item.description}}</p>
+                                <div class="d-flex justify-content-between"> <span class="font-weigh-right">{{item.time}}</span>
 
-                         </div>
-                  </div>
-                      <form action="orderdone/" method="post">
-                          {% csrf_token %}
-                          <input  style="display:none" type="text" value="{{item.name}}" name="item">
+                                </div>
 
-                <button  style="margin-left:70%;padding-left:30px;" type="submit" class="btn btn-success" value="{{item.makername}}" name="makername">Add to bag</button>
-                      </form>
-               </div>
-              </div>
-          </div>
+
+                            </div>
+
+
+                              <form action="orderdone/" method="post">
+                                    {% csrf_token %}
+                                    <input  style="display:none" type="text" value="{{item.name}}" name="item">
+                            <div class="card-body">
+                                <div class="text-center buttons"> <button class="btn btn-dark" value="{{item.makername}}" name="makername">Order</button> </div>
+                            </div>
+                              </form>
+                        </div>
+                    </div>
 
 
 

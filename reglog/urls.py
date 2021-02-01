@@ -23,6 +23,7 @@ urlpatterns = [
     path('itemadd/',views.itemadd,name='itemadd'),
 
     path('result/',views.result),
+    path('result/orderdone/',views.order_done),
     path('orderdone/',views.order_done,name='order_done'),
     path('todays/orderdone/', views.order_done, name='order_done'),
     path('dokan_offer/orderdone/',views.order_done),
