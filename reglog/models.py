@@ -27,6 +27,8 @@ class product(models.Model):
     booking=models.CharField(max_length=50,blank=True,null=True)
     type=models.CharField(max_length=50,blank=True,null=True)
     time=models.CharField(max_length=50,blank=True,null=True)
+    discount=models.IntegerField(blank=True,null=True)
+    rating=models.IntegerField(blank=True,null=True)
     clientInfo=models.ForeignKey(ClientInformation,blank=True,null=True,on_delete=models.CASCADE)
 
 

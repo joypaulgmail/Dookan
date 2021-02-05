@@ -24,6 +24,7 @@ urlpatterns = [
 
     path('result/',views.result),
     path('result/orderdone/',views.order_done),
+    path("itemdetails",views.item_details,name="itemdetails"),
     path('orderdone/',views.order_done,name='order_done'),
     path('todays/orderdone/', views.order_done, name='order_done'),
     path('dokan_offer/orderdone/',views.order_done),

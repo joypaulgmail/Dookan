@@ -10,7 +10,7 @@ class registerAdmin(admin.ModelAdmin):
 
 @admin.register(product)
 class productAdmin(admin.ModelAdmin):
-    list_display = ("id","name","price","image","description","makername","booking","type","time","clientInfo")
+    list_display = ("id","name","price","image","description","makername","booking","type","time","discount","rating","clientInfo")
 
 @admin.register(delivard)
 class delivardAdmin(admin.ModelAdmin):

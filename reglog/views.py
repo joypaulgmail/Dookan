@@ -24,11 +24,19 @@ def home(request):
 
 
 
-    r=product.objects.raw("select * from product")
+    r=product.objects.raw("select * from product limit 20")
+    #length=len(r)#14
+   # x=length%4
+   # length=length-x
+    #print(length)
+    #r = product.objects.raw("select * from product limit %s",(length,))
+
 
 
     return render(request,"reglog/home.html",{"name":r,"flag":flag})
 
+def item_details(request):
+    return render(request,"reglog/itemdetail.html")
 
 def order_done(request):
     if  request.COOKIES.get("email") and request.COOKIES.get("password"):
@@ -38,7 +46,10 @@ def order_done(request):
             makername=request.POST.get("makername")
             name=request.POST.get("item")
             query=product.objects.filter(makername=makername).filter(name=name)[0]
-            print(query.booking)
+
+            product_name=query.name
+
+
             booking=str(int(query.booking)+1)
 
 
@@ -48,9 +59,15 @@ def order_done(request):
             ob=product.objects.filter(makername=makername).filter(name=name).update(booking=booking)
         #ob=product.objects.raw("UPDATE product SET booking=1 WHERE makername=%s",(makername,))
             print(ob)
+            print(ob)
+            x=request.COOKIES["email"]
+            print(x)
 
 
-        return render(request,"reglog/orderdone.html",{"id":makername})
+
+        return render(request,"reglog/orderdone.html",{"id":makername,"query":query,"email":x})
+
+
     else:
         return render(request,"reglog/signin.html")
 
@@ -118,11 +135,15 @@ def result(request):
     if request.method=="POST":
         search=request.POST.get("srch")
         city=request.POST.get('city')
+        some_var = request.POST.get('che')
+        print("hello",some_var)
 
 
 
 
         row = product.objects.raw("select * from product where type=%s", (search,))
+
+        print(len(row))
         return render(request, "reglog/home.html",{"name":row,"flag":flag,'city':city})
 
 
@@ -193,8 +214,41 @@ def today(request):
     flag = None
     if request.COOKIES.get("email") and request.COOKIES.get("password"):
         flag=True
-        r = product.objects.raw("select * from product")
+        r = product.objects.raw("select * from product where discount>1 order by discount desc")
+
         return render(request,'reglog/todays_deal.html',{'name':r,'flag':flag})
+
+
+
+
+
+from django.db.models.signals import post_save,pre_save
+from django.dispatch import receiver
+from django.db import connection
+@receiver(pre_save,sender=product)
+def hell(sender,instance,**kwargs):
+
+
+    highest_booking="select max(booking) from product limit 1"
+    cursor=connection.cursor()
+    cursor.execute( highest_booking)
+    x=cursor.fetchone()
+    highest_booking=int("".join(map(str,x)))
+    booking = int(instance.booking)*4
+    instance.rating=highest_booking/booking
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def todays_deal(request):

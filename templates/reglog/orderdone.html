@@ -1,15 +1,59 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>order done</h1>
-{{id}}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+#img{height:300px;}
+</style>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32">
+  <h1><b>YES DOOKAN</b></h1>
+  <p>Welcome {{email}} <span class="w3-tag">enjoy it</span></p>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+  <div class="w3-col l8 s12">
+  <!-- Blog entry -->
+    <div class="w3-card-4 w3-margin w3-white">
+      <img id="img" src="{{query.image.url}}" alt="Nature" style="width:100%">
+
+      <div class="w3-container">
+        <h3><b>{{query.name}}</b></h3>
+        <h3 style="float:right;"><span class="font-weigh star">{{query.booking}}&starf;</span>Delivery Time<b> <span class="w3-opacity">{{query.time}}hrs</span></b></h3>
+        <h5>ITEM DESCRIPTION</h5>
+      </div>
+
+    <div class="w3-container">
+      <p>{{query.description}} Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
+        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3">Contact: <b>{{query.clientInfo.primary_contact}}  </b>
+         <span class="w3-padding-large w3-left">Email: <b>{{query.clientInfo.email}}  </b> </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <hr>
+
 
 </body>
 </html>
