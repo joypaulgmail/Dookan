@@ -29,6 +29,7 @@ class product(models.Model):
     time=models.CharField(max_length=50,blank=True,null=True)
     discount=models.IntegerField(blank=True,null=True)
     rating=models.IntegerField(blank=True,null=True)
+    review=models.CharField(max_length=500,blank=True,null=True)
     clientInfo=models.ForeignKey(ClientInformation,blank=True,null=True,on_delete=models.CASCADE)
 
 
