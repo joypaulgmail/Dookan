@@ -41,7 +41,15 @@ class product(models.Model):
     class Meta:
         db_table = "product"
 
+import datetime
+class ReviewProduct(models.Model):
+    product_id=models.IntegerField(blank=True,null=True)
+    username=models.CharField(max_length=50,blank=True,null=True)
+    date=models.DateTimeField(blank=True,null=True)
+    review=models.CharField(max_length=200,blank=True,null=True)
 
+    class Meta:
+        db_table="reviewproduct"
 
 
 class delivard(models.Model):

@@ -360,7 +360,7 @@ css">
     {% else %}
          {% if item.discount %}
               <div class="col-md-3">
-                        <div class="card"><a href=""><img src="{{item.image.url}}" class="card-img-top"><p class="discount">{{item.discount}}% OFF</p></a>
+                        <div class="card"><a href="/product_detail/{{item.id}}"><img src="{{item.image.url}}" class="card-img-top"><p class="discount">{{item.discount}}% OFF</p></a>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between"> <span class="font-weight-bold name">{{item.name}}</span>
 
@@ -394,7 +394,7 @@ css">
                     </div>
                 {% else %}
                                   <div class="col-md-3">
-                        <div class="card"><a href="#"><img src="{{item.image.url}}" class="card-img-top"></a>
+                        <div class="card"><a href="/product_detail/{{item.id}}"><img src="{{item.image.url}}" class="card-img-top"></a>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between"> <span class="font-weight-bold name">{{item.name}}</span><span class="font-weigh star">{{item.booking}}&starf;</span>
                                     <span class="price">&#x20b9;{{item.price}}</span> </div>

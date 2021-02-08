@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from reglog.models import product,userdetails,delivard
+from reglog.models import product,userdetails,delivard,ReviewProduct
 from client.models import ClientInformation
 from django.contrib.auth.hashers import make_password
 from reglog import signals
@@ -37,6 +37,27 @@ def home(request):
 
 def item_details(request):
     return render(request,"reglog/itemdetail.html")
+
+def product_detail(request,id):
+    print(id)
+    x=product.objects.get(id=id)
+    email = request.COOKIES["email"]
+    review=ReviewProduct.objects.filter(product_id=id)
+
+    return render(request,"reglog/review.html",{"item":x,"email":email,"review":review})
+
+import datetime
+def review(request):
+    if request.method=="POST":
+        review=request.POST.get("review")
+        item_id=request.POST.get("item_id")
+        email = request.COOKIES["email"]
+        date=datetime.datetime.now()
+        ob=ReviewProduct.objects.create(product_id=item_id,review=review,date=date,username=email)
+        print(item_id)
+        print(review)
+        return redirect('/')
+
 
 def order_done(request):
     if  request.COOKIES.get("email") and request.COOKIES.get("password"):

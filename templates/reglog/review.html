@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+#img{height:300px;}
+#review{width:450px;}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color:red;
+  width:1300px;
+}
+.user_review{background-color:#E1E0D9;width:1200px;padding:20px;}
+.user{font-size:30px;}
+.date{float:right;background-color:dark-gray;font-size:25px;}
+
+</style>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32">
+  <h1><b>YES DOOKAN</b></h1>
+  <p>Welcome {{email}} <span class="w3-tag">enjoy it</span></p>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+  <div class="w3-col l8 s12">
+  <!-- Blog entry -->
+    <div class="w3-card-4 w3-margin w3-white">
+      <img id="img" src="{{item.image.url}}" alt="Nature" style="width:100%">
+
+
+      <div class="w3-container">
+          <h3><b>{{item.name|upper}}</b>
+              <span class="font-weigh star" style="margin-left:330px;">{% for i in item.booking %}{{i}}<span class="fa fa-star checked"></span>{% endfor %}
+                  <span class="w3-opacity" style="float:right">{{item.time}}hrs</span>
+          </h3>
+
+
+        <h5>ITEM DESCRIPTION</h5>
+      </div>
+
+    <div class="w3-container">
+      <p>{{query.description}} Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
+        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3">Contact: <b>{{item.clientInfo.primary_contact}}  </b>
+         <span class="w3-padding-large w3-left">Email: <b>{{item.clientInfo.email}}  </b> </p>
+        </div>
+          <form action="review" method="POST">
+              {% csrf_token%}
+               <input type="text" class="form-control" id="review" name="review">
+               <input  style="display:none" type="text" value="{{item.id}}" name="item_id">
+
+               <p><button class="w3-button w3-padding-large w3-white w3-border"><b> Add Review</b></button></p>
+              </form>
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <hr>
+      <div class="w3-row" style="margin-left:50px;position:absolute;">
+
+        {% for item in review %}
+            <div class="user_review">
+                    <h4>  <b>  {{item.review|upper}}</b></h4>
+                   <span class="user"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{item.username}}</span>
+                  <span  class="date" >{{item.date}}</span>
+
+            </div>
+           <br>
+                <br>
+
+      {% endfor %}
+    </div>
+
+
+</body>
+</html>
