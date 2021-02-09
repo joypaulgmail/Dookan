@@ -10,21 +10,80 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+function fun(){
+
+alert(window.location.href);
+}
+</script>
 <style>
 body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 #img{height:300px;}
-#review{width:450px;}
+#review{width:550px;}
 hr {
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  background-color:red;
+  background-color:black;
   width:1300px;
 }
-.user_review{background-color:#E1E0D9;width:1200px;padding:20px;}
+.user_review{background-color:#E1E0D9;padding:20px;width:800px;}
 .user{font-size:30px;}
 .date{float:right;background-color:dark-gray;font-size:25px;}
+.txt-center {
+    text-align: center;
+}
+.hide {
+    display: none;
+}
+
+.clear {
+    float: none;
+    clear: both;
+}
+
+.rating {
+    width: 150px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    position: relative;
+    font-size:20px;
+}
+
+.rating > label {
+    float: right;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 1.1em;
+    cursor: pointer;
+    color: #000;
+}
+.radio-btn hide{font-size:30px;}
+
+.rating > label:hover,
+.rating > label:hover ~ label,
+.rating > input.radio-btn:checked ~ label {
+    color: transparent;
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating > input.radio-btn:checked ~ label:before,
+.rating > input.radio-btn:checked ~ label:before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+
+    }
+#star5{font-size:30px;}
+.w3-row{display:inline;}
+#review_btn{margin-left:750px;}
+
 
 </style>
 <body class="w3-light-grey">
@@ -51,7 +110,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 
       <div class="w3-container">
           <h3><b>{{item.name|upper}}</b>
-              <span class="font-weigh star" style="margin-left:330px;">{% for i in item.booking %}{{i}}<span class="fa fa-star checked"></span>{% endfor %}
+
                   <span class="w3-opacity" style="float:right">{{item.time}}hrs</span>
           </h3>
 
@@ -67,15 +126,33 @@ and is wrapped around the whole page content, except for the footer in this exam
 
         </div>
         <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-large w3">Contact: <b>{{item.clientInfo.primary_contact}}  </b>
-         <span class="w3-padding-large w3-left">Email: <b>{{item.clientInfo.email}}  </b> </p>
+          <p><span class="w3-padding-large w3">Vendor Contact: <b>{{item.clientInfo.primary_contact}}  </b>
+         <span class="w3-padding-large w3-left">Vendor Email: <b>{{item.clientInfo.email}}  </b> </p>
         </div>
           <form action="review" method="POST">
               {% csrf_token%}
-               <input type="text" class="form-control" id="review" name="review">
+               <input type="text" class="form-control" id="review" name="review" placeholder="add your review..">
                <input  style="display:none" type="text" value="{{item.id}}" name="item_id">
+               <div class="txt-center">
 
-               <p><button class="w3-button w3-padding-large w3-white w3-border"><b> Add Review</b></button></p>
+        <div class="rating" id="review_btn" style="padding:0;margin-left:370px;">
+            <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+            <label for="star5">☆</label>
+            <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+            <label for="star4">☆</label>
+            <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+            <label for="star3">☆</label>
+            <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+            <label for="star2">☆</label>
+            <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+            <label for="star1">☆</label>
+            <div class="clear"></div>
+        </div>
+
+</div>
+                 <button id="demo" onclick="fun()">COPY URl</button>
+
+               <p id="review_btn"><button class="btn btn-warning"><b> Add Review</b></button></p>
               </form>
 
       </div>
@@ -85,13 +162,16 @@ and is wrapped around the whole page content, except for the footer in this exam
 
   </div>
   <hr>
-      <div class="w3-row" style="margin-left:50px;position:absolute;">
+      <div class="w3-row" style="margin-left:100px;position:absolute;">
 
         {% for item in review %}
             <div class="user_review">
-                    <h4>  <b>  {{item.review|upper}}</b></h4>
+                    <h4>  <b>  {{item.review|upper}}</b> <span style="float:right;font-weight:bold;">{{item.star}}&star;</span></h4>
                    <span class="user"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{item.username}}</span>
                   <span  class="date" >{{item.date}}</span>
+
+
+
 
             </div>
            <br>

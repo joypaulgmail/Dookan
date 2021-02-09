@@ -44,19 +44,39 @@ def product_detail(request,id):
     email = request.COOKIES["email"]
     review=ReviewProduct.objects.filter(product_id=id)
 
+
     return render(request,"reglog/review.html",{"item":x,"email":email,"review":review})
 
-import datetime
+from django.utils import timezone
+
+from dateutil.tz import *
+from datetime import datetime
+from django.db import connection
 def review(request):
     if request.method=="POST":
         review=request.POST.get("review")
         item_id=request.POST.get("item_id")
+        star=request.POST.get("star")
+        print(star)
         email = request.COOKIES["email"]
-        date=datetime.datetime.now()
-        ob=ReviewProduct.objects.create(product_id=item_id,review=review,date=date,username=email)
-        print(item_id)
-        print(review)
+        now = datetime.now()
+
+        #ob = ReviewProduct.objects.create(product_id=item_id, review=review, date=now, username=email, star=star)
+        #ob=ReviewProduct.objects.raw("INSERT INTO reviewproduct VALUES(%s,%s,%s,%s,%s)",['75','SOP@.com','2017-07-19','LOVE','5'])
+        cursor=connection.cursor()
+        cursor=cursor.execute("insert into reviewproduct(product_id,username,date,review,star)values(%s,%s,%s,%s,%s)",(item_id,email,now,review,star))
+
+
         return redirect('/')
+
+
+
+
+
+
+
+
+
 
 
 def order_done(request):
